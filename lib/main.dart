@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'register.dart';
 import 'dashboard_chat.dart';
 
@@ -77,9 +78,7 @@ class _LoginPageState extends State<LoginPage> {
     // TODO: Navigator.push(context, MaterialPageRoute(builder: (_) => const RegisterPage()));
     Navigator.push(
       context,
-      MaterialPageRoute(
-          builder: (context) => const RegisterPage(),
-        )
+      MaterialPageRoute(builder: (context) => const RegisterPage()),
     );
   }
 
@@ -104,7 +103,7 @@ class _LoginPageState extends State<LoginPage> {
                         'assets/images/logo_brudy.png',
                         width: 124,
                         height: 124,
-                        errorBuilder: (_, __, ___) => const Icon(
+                        errorBuilder: (_, _, _) => const Icon(
                           Icons.school,
                           size: 100,
                           color: AppColors.title,

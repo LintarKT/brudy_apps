@@ -1,4 +1,5 @@
 import 'dashboard_chat.dart';
+
 import 'package:flutter/material.dart';
 
 class LengkapiProfilPage extends StatefulWidget {
@@ -57,7 +58,7 @@ class _LengkapiProfilPageState extends State<LengkapiProfilPage> {
                       'assets/images/logo_brudy.png',
                       width: 90,
                       height: 90,
-                      errorBuilder: (_, __, ___) => const Icon(
+                      errorBuilder: (_, _, _) => const Icon(
                         Icons.school,
                         size: 80,
                         color: Color(0xFF1E2B50),
@@ -104,18 +105,21 @@ class _LengkapiProfilPageState extends State<LengkapiProfilPage> {
                     child: ListView.separated(
                       scrollDirection: Axis.horizontal,
                       itemCount: 8,
-                      separatorBuilder: (_, __) => const SizedBox(width: 8),
+                      separatorBuilder: (_, _) => const SizedBox(width: 8),
                       itemBuilder: (context, index) {
                         int semester = index + 1;
                         bool isSelected = _selectedSemester == semester;
                         return GestureDetector(
-                          onTap: () => setState(() => _selectedSemester = semester),
+                          onTap: () =>
+                              setState(() => _selectedSemester = semester),
                           child: Container(
                             width: 48,
                             height: 48,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              color: isSelected ? const Color(0xFF1E2B50) : Colors.white,
+                              color: isSelected
+                                  ? const Color(0xFF1E2B50)
+                                  : Colors.white,
                               border: Border.all(
                                 color: const Color(0xFF1E2B50),
                                 width: 1.2,
@@ -127,7 +131,9 @@ class _LengkapiProfilPageState extends State<LengkapiProfilPage> {
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
-                                  color: isSelected ? Colors.white : const Color(0xFF1E2B50),
+                                  color: isSelected
+                                      ? Colors.white
+                                      : const Color(0xFF1E2B50),
                                 ),
                               ),
                             ),
@@ -145,12 +151,13 @@ class _LengkapiProfilPageState extends State<LengkapiProfilPage> {
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: _daftarMataKuliah.length + 1,
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 12,
-                      mainAxisSpacing: 12,
-                      childAspectRatio: 2.6,
-                    ),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 12,
+                          mainAxisSpacing: 12,
+                          childAspectRatio: 2.6,
+                        ),
                     itemBuilder: (context, index) {
                       if (index < _daftarMataKuliah.length) {
                         String matkul = _daftarMataKuliah[index];
@@ -168,7 +175,9 @@ class _LengkapiProfilPageState extends State<LengkapiProfilPage> {
                           child: Container(
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
-                              color: isSelected ? const Color(0xFF1E2B50) : Colors.white,
+                              color: isSelected
+                                  ? const Color(0xFF1E2B50)
+                                  : Colors.white,
                               borderRadius: BorderRadius.circular(24),
                               border: Border.all(
                                 color: const Color(0xFF1E2B50),
@@ -180,7 +189,9 @@ class _LengkapiProfilPageState extends State<LengkapiProfilPage> {
                               style: TextStyle(
                                 fontSize: 13,
                                 fontWeight: FontWeight.w600,
-                                color: isSelected ? Colors.white : const Color(0xFF1E2B50),
+                                color: isSelected
+                                    ? Colors.white
+                                    : const Color(0xFF1E2B50),
                               ),
                               textAlign: TextAlign.center,
                             ),
@@ -231,11 +242,11 @@ class _LengkapiProfilPageState extends State<LengkapiProfilPage> {
                         borderRadius: BorderRadius.circular(30),
                         onTap: () {
                           Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const DashboardChatPage()
-                                ),
-                            );
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const DashboardChatPage(),
+                            ),
+                          );
                           // Aksi setelah profil lengkap selesai diisi
                         },
                         child: const Center(
@@ -270,7 +281,10 @@ class _FieldLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 10),
-      child: Text(text, style: const TextStyle(fontSize: 17, color: Color(0xFF4A5578))),
+      child: Text(
+        text,
+        style: const TextStyle(fontSize: 17, color: Color(0xFF4A5578)),
+      ),
     );
   }
 }
@@ -287,7 +301,10 @@ class _RoundedField extends StatelessWidget {
       decoration: InputDecoration(
         filled: true,
         fillColor: Colors.white,
-        contentPadding: const EdgeInsets.symmetric(horizontal: 22, vertical: 18),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 22,
+          vertical: 18,
+        ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(28),
           borderSide: const BorderSide(color: Color(0xFF1E2B50), width: 1.2),

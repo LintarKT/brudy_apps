@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'lengkapi_profil.dart';
 
 void main() {
@@ -98,7 +99,7 @@ class _LoginPageState extends State<LoginPage> {
                         'assets/images/logo_brudy.png',
                         width: 124,
                         height: 124,
-                        errorBuilder: (_, __, ___) => const Icon(
+                        errorBuilder: (_, _, _) => const Icon(
                           Icons.school,
                           size: 100,
                           color: AppColors.title,
@@ -213,11 +214,13 @@ class _RegisterPageState extends State<RegisterPage> {
   final _namaController = TextEditingController();
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
-  
+
   // Controller untuk 4 digit Kode Verifikasi OTP
-  final List<TextEditingController> _otpControllers =
-      List.generate(4, (_) => TextEditingController());
-      
+  final List<TextEditingController> _otpControllers = List.generate(
+    4,
+    (_) => TextEditingController(),
+  );
+
   bool _obscurePassword = true;
   bool _isLoading = false;
 
@@ -282,7 +285,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         'assets/images/logo_brudy.png',
                         width: 90,
                         height: 90,
-                        errorBuilder: (_, __, ___) => const Icon(
+                        errorBuilder: (_, _, _) => const Icon(
                           Icons.school,
                           size: 80,
                           color: AppColors.title,
@@ -368,17 +371,17 @@ class _RegisterPageState extends State<RegisterPage> {
                     const SizedBox(height: 6),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: List.generate(4, (index) => _buildOtpBox(index)),
+                      children: List.generate(
+                        4,
+                        (index) => _buildOtpBox(index),
+                      ),
                     ),
                     const SizedBox(height: 6),
                     const Padding(
                       padding: EdgeInsets.only(left: 10),
                       child: Text(
                         '*kode akan dikirim melalui email kampusmu',
-                        style: TextStyle(
-                          color: AppColors.label,
-                          fontSize: 12,
-                        ),
+                        style: TextStyle(color: AppColors.label, fontSize: 12),
                       ),
                     ),
                     const SizedBox(height: 36),
