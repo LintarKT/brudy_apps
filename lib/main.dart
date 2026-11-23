@@ -1,121 +1,332 @@
 import 'package:flutter/material.dart';
+import 'register.dart';
+import 'dashboard_chat.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const BrudyApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+/// ===================== WARNA =====================
+class AppColors {
+  static const background = Color(0xFFE6E8F1); // latar belakang abu kebiruan
+  static const title = Color(0xFF1E2B50); // judul & border input
+  static const label = Color(0xFF4A5578); // label & teks sekunder
+  static const gradientStart = Color(0xFF202F55); // tombol (kiri)
+  static const gradientEnd = Color(0xFF4565B8); // tombol (kanan)
+}
 
-  // This widget is the root of your application.
+/// ===================== APP ROOT =====================
+class BrudyApp extends StatelessWidget {
+  const BrudyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'BRUDYs',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+        scaffoldBackgroundColor: AppColors.background,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const LoginPage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
+/// ===================== HALAMAN LOGIN =====================
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+class _LoginPageState extends State<LoginPage> {
+  final _formKey = GlobalKey<FormState>();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  bool _obscurePassword = true;
+  bool _isLoading = false;
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _handleLogin() async {
+    if (!_formKey.currentState!.validate()) return;
+
+    setState(() => _isLoading = true);
+
+    // TODO: ganti dengan pemanggilan API / Firebase Auth kamu
+    await Future.delayed(const Duration(seconds: 1));
+
+    if (!mounted) return;
+    setState(() => _isLoading = false);
+
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) => const DashboardChatPage()),
+      (route) => false,
+    );
+  }
+
+  void _goToRegister() {
+    // TODO: Navigator.push(context, MaterialPageRoute(builder: (_) => const RegisterPage()));
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => const RegisterPage(),
+        )
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: .center,
-          children: [
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+      body: SafeArea(
+        child: Center(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 420),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    // ---------- Logo ----------
+                    Center(
+                      child: Image.asset(
+                        'assets/images/logo_brudy.png',
+                        width: 124,
+                        height: 124,
+                        errorBuilder: (_, __, ___) => const Icon(
+                          Icons.school,
+                          size: 100,
+                          color: AppColors.title,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+
+                    // ---------- Judul ----------
+                    const Text(
+                      'Login',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 40,
+                        fontWeight: FontWeight.w800,
+                        color: AppColors.title,
+                      ),
+                    ),
+                    const SizedBox(height: 40),
+
+                    // ---------- Email / Username ----------
+                    const _FieldLabel('Email Kampus / Username'),
+                    const SizedBox(height: 8),
+                    _RoundedField(
+                      controller: _emailController,
+                      keyboardType: TextInputType.emailAddress,
+                      textInputAction: TextInputAction.next,
+                      validator: (v) => (v == null || v.trim().isEmpty)
+                          ? 'Email / username wajib diisi'
+                          : null,
+                    ),
+                    const SizedBox(height: 20),
+
+                    // ---------- Password ----------
+                    const _FieldLabel('Password'),
+                    const SizedBox(height: 8),
+                    _RoundedField(
+                      controller: _passwordController,
+                      obscureText: _obscurePassword,
+                      textInputAction: TextInputAction.done,
+                      onSubmitted: (_) => _handleLogin(),
+                      validator: (v) => (v == null || v.isEmpty)
+                          ? 'Password wajib diisi'
+                          : null,
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          _obscurePassword
+                              ? Icons.visibility_off_outlined
+                              : Icons.visibility_outlined,
+                          color: AppColors.label,
+                        ),
+                        onPressed: () => setState(
+                          () => _obscurePassword = !_obscurePassword,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 56),
+
+                    // ---------- Tombol Login ----------
+                    _GradientButton(
+                      text: 'Login',
+                      isLoading: _isLoading,
+                      onPressed: _isLoading ? null : _handleLogin,
+                    ),
+                    const SizedBox(height: 24),
+
+                    // ---------- Buat Akun ----------
+                    const Text(
+                      'Belum Punya Akun?',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 16, color: AppColors.label),
+                    ),
+                    const SizedBox(height: 4),
+                    Center(
+                      child: GestureDetector(
+                        onTap: _goToRegister,
+                        child: const Text(
+                          'Buat Akun',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w700,
+                            fontStyle: FontStyle.italic,
+                            decoration: TextDecoration.underline,
+                            decorationColor: AppColors.label,
+                            color: AppColors.label,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
-          ],
+          ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+    );
+  }
+}
+
+/// ===================== KOMPONEN =====================
+
+/// Label di atas input
+class _FieldLabel extends StatelessWidget {
+  final String text;
+  const _FieldLabel(this.text);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 10),
+      child: Text(
+        text,
+        style: const TextStyle(fontSize: 17, color: AppColors.label),
+      ),
+    );
+  }
+}
+
+/// Input putih dengan sudut membulat & border biru tua
+class _RoundedField extends StatelessWidget {
+  final TextEditingController controller;
+  final bool obscureText;
+  final TextInputType? keyboardType;
+  final TextInputAction? textInputAction;
+  final String? Function(String?)? validator;
+  final void Function(String)? onSubmitted;
+  final Widget? suffixIcon;
+
+  const _RoundedField({
+    required this.controller,
+    this.obscureText = false,
+    this.keyboardType,
+    this.textInputAction,
+    this.validator,
+    this.onSubmitted,
+    this.suffixIcon,
+  });
+
+  OutlineInputBorder _border(Color color, [double width = 1.2]) =>
+      OutlineInputBorder(
+        borderRadius: BorderRadius.circular(28),
+        borderSide: BorderSide(color: color, width: width),
+      );
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      controller: controller,
+      obscureText: obscureText,
+      keyboardType: keyboardType,
+      textInputAction: textInputAction,
+      onFieldSubmitted: onSubmitted,
+      validator: validator,
+      style: const TextStyle(fontSize: 16, color: AppColors.title),
+      cursorColor: AppColors.title,
+      decoration: InputDecoration(
+        filled: true,
+        fillColor: Colors.white,
+        suffixIcon: suffixIcon,
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 22,
+          vertical: 18,
+        ),
+        enabledBorder: _border(AppColors.title),
+        focusedBorder: _border(AppColors.title, 2),
+        errorBorder: _border(Colors.red.shade700),
+        focusedErrorBorder: _border(Colors.red.shade700, 2),
+      ),
+    );
+  }
+}
+
+/// Tombol dengan gradasi kiri (gelap) -> kanan (biru terang)
+class _GradientButton extends StatelessWidget {
+  final String text;
+  final VoidCallback? onPressed;
+  final bool isLoading;
+
+  const _GradientButton({
+    required this.text,
+    required this.onPressed,
+    this.isLoading = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 60,
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          begin: Alignment.centerLeft,
+          end: Alignment.centerRight,
+          colors: [AppColors.gradientStart, AppColors.gradientEnd],
+        ),
+        borderRadius: BorderRadius.circular(30),
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(30),
+          onTap: onPressed,
+          child: Center(
+            child: isLoading
+                ? const SizedBox(
+                    width: 24,
+                    height: 24,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2.5,
+                      color: Colors.white,
+                    ),
+                  )
+                : Text(
+                    text,
+                    style: const TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.white,
+                    ),
+                  ),
+          ),
+        ),
       ),
     );
   }
