@@ -15,19 +15,19 @@ class _DashboardChatPageState extends State<DashboardChatPage> {
       'name': 'Valeria',
       'message': 'abcdefghijklmnopqrstuvwxyz',
       'time': 'Hari Ini\n08.24',
-      'image': 'assets/images/valeria.png', // Sesuaikan asset gambar jika ada
+      'image': 'assets/Valeria.jpeg', // Sesuaikan asset gambar jika ada
     },
     {
       'name': 'Qin Che',
       'message': 'abcdefghijklmnopqrstuvwxyz',
       'time': 'Kemarin\n23.59',
-      'image': 'assets/images/qinche.png',
+      'image': 'assets/Qin Che.jpeg',
     },
     {
       'name': 'Ao Yin',
       'message': 'abcdefghijklmnopqrstuvwxyz',
       'time': 'Kemarin\n17.30',
-      'image': 'assets/images/aoyin.png',
+      'image': 'assets/Ao Yin.jpeg',
     },
   ];
 
