@@ -230,7 +230,10 @@ class _DashboardChatPageState extends State<DashboardChatPage> {
                     color: _currentIndex == 1 ? Colors.white : Colors.white60,
                     size: 28,
                   ),
-                  onPressed: () => setState(() => _currentIndex = 1),
+                  onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const ProfilePage()),
+                  ),
                 ),
               ],
             ),

@@ -54,12 +54,11 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBody: true,
       backgroundColor: const Color(0xFFE5E7F1),
       body: SafeArea(
         bottom: false,
         child: SingleChildScrollView(
-          padding: const EdgeInsets.fromLTRB(24, 8, 24, 140),
+          padding: const EdgeInsets.fromLTRB(24, 8, 24, 40),
           child: Column(
             children: [
               Text(
@@ -283,66 +282,66 @@ class _BottomBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 120,
-      child: Stack(
-        alignment: Alignment.bottomCenter,
-        clipBehavior: Clip.none,
-        children: [
-          // Bar
-          Container(
-            height: 84,
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20),
-                topRight: Radius.circular(20),
-              ),
-              gradient: LinearGradient(
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-                colors: [Color(0xFF232B66), Color(0xFF3F4BB0)],
-              ),
+    return Stack(
+      clipBehavior: Clip.none,
+      alignment: Alignment.topCenter,
+      children: [
+        Container(
+          height: 70,
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Color(0xFF202F55), Color(0xFF4565B8)],
             ),
-            padding: const EdgeInsets.symmetric(horizontal: 44),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                IconButton(
-                  onPressed: () {},
-                  iconSize: 36,
-                  color: Colors.white,
-                  icon: const Icon(Icons.chat_bubble_outline_rounded),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              IconButton(
+                icon: const Icon(
+                  Icons.chat_bubble_outline,
+                  color: Colors.white60,
+                  size: 28,
                 ),
-                IconButton(
-                  onPressed: () {},
-                  iconSize: 38,
+                onPressed: () => Navigator.maybePop(context),
+              ),
+              const SizedBox(width: 40),
+              IconButton(
+                icon: const Icon(
+                  Icons.person_outline,
                   color: Colors.white,
-                  icon: const Icon(Icons.account_circle_outlined),
+                  size: 28,
+                ),
+                onPressed: () {},
+              ),
+            ],
+          ),
+        ),
+        Positioned(
+          top: -22,
+          child: Container(
+            width: 56,
+            height: 56,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              gradient: const LinearGradient(
+                colors: [Color(0xFF202F55), Color(0xFF4565B8)],
+              ),
+              border: Border.all(color: Colors.white, width: 2),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.2),
+                  blurRadius: 6,
+                  offset: const Offset(0, 3),
                 ),
               ],
             ),
-          ),
-          // Tombol tengah
-          Positioned(
-            top: 0,
-            child: Container(
-              width: 70,
-              height: 70,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: kNavyDark,
-                border: Border.all(color: const Color(0xFFA9B4F2), width: 5),
-              ),
-              child: IconButton(
-                onPressed: () {},
-                iconSize: 30,
-                color: Colors.white,
-                icon: const Icon(Icons.add_comment_outlined),
-              ),
+            child: IconButton(
+              icon: const Icon(Icons.add, color: Colors.white, size: 28),
+              onPressed: () {},
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
