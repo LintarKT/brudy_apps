@@ -25,8 +25,7 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
     {'sender': 'me', 'message': 'Halooo', 'time': '08.26'},
     {
       'sender': 'peer',
-      'message':
-          'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+      'message': 'Kamu dari UIN Salatiga ya?',
       'time': '08.28',
     },
     {'sender': 'me', 'message': 'Iyaaa', 'time': '08.30'},

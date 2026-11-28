@@ -14,19 +14,19 @@ class _DashboardChatPageState extends State<DashboardChatPage> {
   final _chatList = [
     {
       'name': 'Valeria',
-      'message': 'abcdefghijklmnopqrstuvwxyz',
+      'message': 'Iyaaa',
       'time': 'Hari Ini\n08.24',
       'image': 'assets/images/valeria.jpeg', // Sesuaikan asset gambar jika ada
     },
     {
       'name': 'Qin Che',
-      'message': 'abcdefghijklmnopqrstuvwxyz',
+      'message': 'Iyaaa',
       'time': 'Kemarin\n23.59',
       'image': 'assets/images/qinche.jpeg',
     },
     {
       'name': 'Ao Yin',
-      'message': 'abcdefghijklmnopqrstuvwxyz',
+      'message': 'Iyaaa',
       'time': 'Kemarin\n17.30',
       'image': 'assets/images/aoyin.jpeg',
     },
