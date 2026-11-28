@@ -250,7 +250,7 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
                               ),
                               child: ClipOval(
                                 child: Image.asset(
-                                  'assets/images/valeria.png', // Ganti dengan foto user yang sedang login
+                                  'assets/images/valeria.jpeg', // Ganti dengan foto user yang sedang login
                                   fit: BoxFit.cover,
                                   errorBuilder: (_, _, _) => const Icon(
                                     Icons.person,

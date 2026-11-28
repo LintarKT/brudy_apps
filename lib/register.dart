@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'lengkapi_profil.dart';
 
 void main() {
@@ -22,7 +21,7 @@ class BrudyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'BRUDYs',
+      title: 'BRUDY',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: true,

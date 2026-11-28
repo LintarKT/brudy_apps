@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'chatroom_page.dart';
+import 'profil_diri.dart';
 
 class DashboardChatPage extends StatefulWidget {
   const DashboardChatPage({super.key});
@@ -15,19 +16,19 @@ class _DashboardChatPageState extends State<DashboardChatPage> {
       'name': 'Valeria',
       'message': 'abcdefghijklmnopqrstuvwxyz',
       'time': 'Hari Ini\n08.24',
-      'image': 'assets/Valeria.jpeg', // Sesuaikan asset gambar jika ada
+      'image': 'assets/images/valeria.jpeg', // Sesuaikan asset gambar jika ada
     },
     {
       'name': 'Qin Che',
       'message': 'abcdefghijklmnopqrstuvwxyz',
       'time': 'Kemarin\n23.59',
-      'image': 'assets/Qin Che.jpeg',
+      'image': 'assets/images/qinche.jpeg',
     },
     {
       'name': 'Ao Yin',
       'message': 'abcdefghijklmnopqrstuvwxyz',
       'time': 'Kemarin\n17.30',
-      'image': 'assets/Ao Yin.jpeg',
+      'image': 'assets/images/aoyin.jpeg',
     },
   ];
 

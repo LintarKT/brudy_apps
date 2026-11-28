@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'register.dart';
 import 'dashboard_chat.dart';
 
+import 'register.dart';
+import 'dashboard_chat.dart';
+
 void main() {
   runApp(const BrudyApp());
 }
@@ -78,7 +81,9 @@ class _LoginPageState extends State<LoginPage> {
     // TODO: Navigator.push(context, MaterialPageRoute(builder: (_) => const RegisterPage()));
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const RegisterPage()),
+      MaterialPageRoute(
+        builder: (context) => const RegisterPage(),
+      ), // MaterialPageRoute
     );
   }
 
